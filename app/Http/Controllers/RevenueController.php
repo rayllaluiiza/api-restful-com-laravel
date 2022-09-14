@@ -17,11 +17,20 @@ class RevenueController extends Controller
     }
 
     public function show(int $id){
-        return Revenue::find($id);
+        $revenue = Revenue::find($id);
+        if($revenue === null){
+            return response()->json(['message' => 'Receita não encontrada.'], 404);
+        }
+
+        return $revenue;
     }
 
     public function update(int $id, Request $request){
         $revenue = Revenue::find($id);
+
+        if($revenue === null){
+            return response()->json(['message' => 'Receita não encontrada.'], 404);
+        }
 
         $revenue->fill($request->all());
         $revenue->save();
@@ -30,6 +39,12 @@ class RevenueController extends Controller
     }
 
     public function destroy(int $id){
+        $revenue = Revenue::find($id);
+
+        if($revenue === null){
+            return response()->json(['message' => 'Receita não encontrada.'], 404);
+        }
+
         Revenue::destroy($id);
 
         return response()->noContent();

@@ -17,11 +17,21 @@ class ExpenseController extends Controller
     }
 
     public function show(int $id){
-        return Expense::find($id);
+        $expense = Expense::find($id);
+
+        if($expense === null){
+            return response()->json(['message' => 'Despesa não encontrada.'], 404);
+        }
+
+        return $expense;
     }
 
     public function update(int $id, Request $request){
         $expense = Expense::find($id);
+
+        if($expense === null){
+            return response()->json(['message' => 'Despesa não encontrada.'], 404);
+        }
 
         $expense->fill($request->all());
         $expense->save();
@@ -30,8 +40,13 @@ class ExpenseController extends Controller
     }
 
     public function destroy(int $id){
+        $expense = Expense::find($id);
+
+        if($expense === null){
+            return response()->json(['message' => 'Despesa não encontrada.'], 404);
+        }
+
         Expense::destroy($id);
-        
         return response()->noContent();
     }
 }
