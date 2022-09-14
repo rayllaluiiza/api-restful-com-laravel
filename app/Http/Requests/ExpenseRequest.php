@@ -26,7 +26,8 @@ class ExpenseRequest extends FormRequest
         return [
             'description' => 'required|min:3|unique:expenses',
             'value' => 'required',
-            'date' => 'required|date'
+            'date' => 'required|date',
+            'category' => 'nullable|in:Alimentação,Saúde,Moradia,Transporte,Educação,Lazer,Imprevistos'
         ];
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRevenueTable extends Migration
+class CreateExpensesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateRevenueTable extends Migration
      */
     public function up()
     {
-        Schema::create('revenues', function (Blueprint $table) {
+        Schema::create('expenses', function (Blueprint $table){
             $table->id();
             $table->string('description');
             $table->float('value');
@@ -28,6 +28,6 @@ class CreateRevenueTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('revenue');
+        Schema::dropIfExists('expenses');
     }
 }
