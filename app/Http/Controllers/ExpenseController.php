@@ -8,7 +8,11 @@ use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        if(isset($request->descricao)){
+            return Expense::where('description', 'like', "%$request->descricao%")->get();
+        }
+
         return Expense::all();
     }
 

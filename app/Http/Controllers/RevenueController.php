@@ -8,7 +8,11 @@ use Illuminate\Http\Request;
 
 class RevenueController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        if(isset($request->descricao)){
+            return Revenue::where('description', 'like', "%$request->descricao%")->get();
+        }
+        
         return Revenue::all();
     }
 
