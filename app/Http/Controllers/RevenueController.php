@@ -53,4 +53,15 @@ class RevenueController extends Controller
 
         return response()->noContent();
     }
+
+    public function listingByMonth(int $year, int $month){
+        $revenue = Revenue::whereYear('date', $year)->whereMonth('date', $month)->get();
+
+        if(count($revenue) == 0){
+            return response()->json(['message' => 'Receita não encontrada.'], 404);
+        }
+
+        return $revenue;
+    }
+
 }

@@ -53,4 +53,14 @@ class ExpenseController extends Controller
         Expense::destroy($id);
         return response()->noContent();
     }
+
+    public function listingByMonth(int $year, int $month){
+        $expense = Expense::whereYear('date', $year)->whereMonth('date', $month)->get();
+
+        if(count($expense) == 0){
+            return response()->json(['message' => 'Despesa não encontrada.'], 404);
+        }
+
+        return $expense;
+    }
 }
